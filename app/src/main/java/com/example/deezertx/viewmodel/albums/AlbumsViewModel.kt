@@ -24,6 +24,10 @@ class AlbumsViewModel(private val repository: AlbumsRepository) : ViewModel(), I
     private var _tracks: MutableLiveData<Tracks?> = MutableLiveData()
     val tracks: LiveData<Tracks?> = _tracks
 
+
+    private var _hasNext: MutableLiveData<Boolean> = MutableLiveData()
+    val hasNext: LiveData<Boolean> = _hasNext
+
     private var _error: MutableLiveData<String> = MutableLiveData()
     val error: LiveData<String> = _error
 
@@ -31,12 +35,13 @@ class AlbumsViewModel(private val repository: AlbumsRepository) : ViewModel(), I
      * fetch albums list data from network api call
      *
      */
-    override fun getAllAlbums() {
+    override fun getAllAlbums(index: Int) {
         viewModelScope.launch {
-            val response = repository.fetchAlbums()
+            val response = repository.fetchAlbums(index)
             // handle the case when the api request gets a success response
             response.onSuccess {
                 Timber.tag(TAG).d("getAllAlbums() called with data : $data")
+                _hasNext.value = !data.nextAlbums.isNullOrEmpty()
                 _albums.value = data
 
             }

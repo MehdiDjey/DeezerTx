@@ -9,7 +9,11 @@ import kotlinx.serialization.json.Json
 
 @Parcelize
 @Serializable
-data class Albums(@SerialName("data") val albums: List<Album> = emptyList()) : Parcelable {
+data class Albums(
+    @SerialName("data") val albums: List<Album> = emptyList(),
+    @SerialName("next") val nextAlbums: String? = ""
+
+) : Parcelable {
     override fun toString(): String {
         return Json.encodeToString(this)
     }

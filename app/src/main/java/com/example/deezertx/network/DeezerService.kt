@@ -6,12 +6,12 @@ import com.skydoves.sandwich.ApiResponse
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface DeezerService {
     @Headers("Accept: application/json")
     @GET("user/2529/albums")
-    suspend fun fetchAlbumsList(): ApiResponse<Albums>
-
+    suspend fun fetchAlbumsList(@Query("index") index: String = ""): ApiResponse<Albums>
 
     @Headers("Accept: application/json")
     @GET("album/{idAlbum}/tracks")

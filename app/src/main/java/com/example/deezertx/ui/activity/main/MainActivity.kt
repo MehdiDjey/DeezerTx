@@ -24,6 +24,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getAlbums() {
-        albumsViewModel.getAllAlbums()
+        albumsViewModel.getAllAlbums(0)
     }
 }

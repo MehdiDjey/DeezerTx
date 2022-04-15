@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.deezertx.databinding.FragmentAlbumsBinding
 import com.example.deezertx.model.Album
 import com.example.deezertx.model.Albums
@@ -17,8 +19,10 @@ import com.example.deezertx.ui.adapter.AlbumsRecyclerViewAdapter
 import com.example.deezertx.ui.fragment.album.BottomSheetAlbumDetails
 import com.example.deezertx.utils.TAG
 import com.example.deezertx.viewmodel.albums.AlbumsViewModel
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
+
 
 /**
  * Albums fragment
@@ -32,6 +36,9 @@ class AlbumsFragment : Fragment(), AlbumsRecyclerViewAdapter.Interaction,
     private val albumsViewModel: AlbumsViewModel by sharedViewModel()
     private lateinit var albumsRecyclerViewAdapter: AlbumsRecyclerViewAdapter
     private var fetchedFullList: List<Album> = emptyList()
+    private var index = 0
+    private var isLoadMore = false
+    private var hasNext = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +54,7 @@ class AlbumsFragment : Fragment(), AlbumsRecyclerViewAdapter.Interaction,
         setupAdapter()
         setupListener()
         subscribeObserver()
+        loadMoreOnReachBottom()
     }
 
     private fun initViews() {
@@ -89,12 +97,53 @@ class AlbumsFragment : Fragment(), AlbumsRecyclerViewAdapter.Interaction,
                 if (it?.albums.isNullOrEmpty()) onEmptyOrErrorDate() else onCompleteDateSuccess(it!!)
             }
 
+            hasNext.observe(viewLifecycleOwner) {
+                this@AlbumsFragment.hasNext = it
+            }
             error.observe(viewLifecycleOwner) {
-                onEmptyOrErrorDate()
+                if (fetchedFullList.isNullOrEmpty()) {
+                    onEmptyOrErrorDate()
+                }
                 Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             }
         }
     }
+
+    /**
+     * Load more on reach bottom
+     *
+     * check if has next page and ready to load more  when user reached the bottom of list
+     *
+     */
+    private fun loadMoreOnReachBottom() {
+        binding?.rvFragmentAlbumsList?.addOnScrollListener(object :
+            RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    lifecycleScope.launch {
+                        Timber.tag(TAG)
+                            .d("onScrollStateChanged() called bottom is reached and has next is $hasNext")
+                        if (hasNext) {
+                            index += 25
+                            albumsViewModel.getAllAlbums(index)
+                            isLoadMore = true
+                            onLoadMore()
+                        }
+                    }
+                }
+            }
+        })
+    }
+
+    /**
+     * On load more show the horizontal progress bar visibility
+     *
+     */
+    private fun onLoadMore() {
+        binding?.progressLoadMore?.visibility = VISIBLE
+    }
+
 
     /**
      * On empty or error date show message
@@ -115,11 +164,20 @@ class AlbumsFragment : Fragment(), AlbumsRecyclerViewAdapter.Interaction,
      */
     private fun onCompleteDateSuccess(albums: Albums) {
         binding?.apply {
+            progressLoadMore.visibility = GONE
             progress.visibility = GONE
             tvNothingToShow.visibility = GONE
             containerAlbumsFragment.visibility = VISIBLE
-            albumsRecyclerViewAdapter.albums = albums.albums
-            fetchedFullList = albums.albums
+            if (isLoadMore) {
+                val newList = albumsRecyclerViewAdapter.albums.toMutableList()
+                newList.addAll(albums.albums)
+                fetchedFullList = newList
+                albumsRecyclerViewAdapter.albums = newList
+
+            } else {
+                albumsRecyclerViewAdapter.albums = albums.albums
+                fetchedFullList = albums.albums
+            }
         }
     }
 

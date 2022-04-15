@@ -20,10 +20,10 @@ class AlbumsRepositoryImp(
      *
      * @return Albums as ApiResponse
      */
-    override suspend fun fetchAlbums(): ApiResponse<Albums> {
+    override suspend fun fetchAlbums(index: Int): ApiResponse<Albums> {
         Timber.tag(TAG).d("fetchAlbums() called")
         return withContext(dispatcher) {
-            deezerService.fetchAlbumsList()
+            deezerService.fetchAlbumsList(index.toString())
         }
     }
 

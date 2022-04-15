@@ -5,6 +5,6 @@ import com.example.deezertx.model.Tracks
 import com.skydoves.sandwich.ApiResponse
 
 interface AlbumsRepository {
-    suspend fun fetchAlbums(): ApiResponse<Albums>
+    suspend fun fetchAlbums(index: Int): ApiResponse<Albums>
     suspend fun getAlbumTracks(idAlbum: Int): ApiResponse<Tracks>
 }

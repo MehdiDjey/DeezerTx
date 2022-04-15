@@ -2,6 +2,6 @@ package com.example.deezertx.`interface`
 
 
 interface IOnAlbum {
-    fun getAllAlbums()
+    fun getAllAlbums(index: Int)
     fun getAlbumsTracks(idAlbum: Int)
 }
