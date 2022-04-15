@@ -90,12 +90,12 @@ dependencies {
     def fragment_version = "1.4.1"
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
 
-    def lifecycle_version ="2.4.1"
+    def lifecycle_version = "2.4.1"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
 
-    def sandwich_version ="1.2.4"
+    def sandwich_version = "1.2.4"
     implementation "com.github.skydoves:sandwich:$sandwich_version"
 
 

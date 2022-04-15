@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.deezertx.R
+import com.example.deezertx.base.BaseApplication
 import com.example.deezertx.databinding.LayoutBottomSheetBinding
 import com.example.deezertx.model.Album
 import com.example.deezertx.model.Tracks
@@ -29,9 +31,9 @@ class BottomSheetAlbumDetails(private val album: Album) : BottomSheetDialogFragm
     }
 
     private val completeDetails = arrayOf(
-        "Preview",
-        "Details",
-        "Track list"
+        BaseApplication.instance.resources.getString(R.string.tab_title_preview),
+        BaseApplication.instance.resources.getString(R.string.tab_title_details),
+        BaseApplication.instance.resources.getString(R.string.tab_title_tracks)
     )
 
 
@@ -40,7 +42,6 @@ class BottomSheetAlbumDetails(private val album: Album) : BottomSheetDialogFragm
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _biding = LayoutBottomSheetBinding.inflate(inflater, container, false)
         return binding?.root
     }

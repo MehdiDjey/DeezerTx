@@ -10,12 +10,8 @@
         android:id="@+id/flow"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="12dp"
         app:constraint_referenced_ids="tvNbTitleLabel,tvNbTitle,tvReleaseLabel,tvRelease, tvDurationLabel,tvDuration,tvNbFanLabel, tvNbFan, tvMostPopularLabel,tvMostPopular"
-        app:flow_horizontalAlign="start"
-        app:flow_horizontalBias="0"
-        app:flow_horizontalStyle="spread_inside"
-        app:flow_maxElementsWrap="2"
+        app:flow_maxElementsWrap="1"
         app:flow_verticalBias="0"
         app:flow_verticalGap="8dp"
         app:flow_wrapMode="aligned"
@@ -28,7 +24,7 @@
         android:id="@+id/tvNbTitleLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Titres"
+        android:text="@string/label_album_info_title"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2" />
 
     <TextView
@@ -43,7 +39,7 @@
         android:id="@+id/tvReleaseLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sorti le "
+        android:text="@string/label_album_info_reslease_date"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2" />
 
     <TextView
@@ -57,7 +53,7 @@
         android:id="@+id/tvDurationLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Durée"
+        android:text="@string/label_album_info_duration"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2" />
 
     <TextView
@@ -72,7 +68,7 @@
         android:id="@+id/tvNbFanLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fans "
+        android:text="@string/lael_album_info_fans"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2" />
 
     <TextView
@@ -87,7 +83,7 @@
         android:id="@+id/tvMostPopularLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Titre le plus populaire "
+        android:text="@string/label_album_photo_most_popular"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2" />
 
     <TextView
@@ -117,13 +113,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.90" />
+        app:layout_constraintGuide_percent="0.95" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineTop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.10" />
+        app:layout_constraintGuide_percent="0.05" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

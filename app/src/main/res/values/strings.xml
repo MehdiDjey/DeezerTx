@@ -91,4 +91,14 @@
     </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="label_album_info_title">Titres</string>
+    <string name="label_album_info_reslease_date">Sorti le</string>
+    <string name="label_album_info_duration">Durée</string>
+    <string name="lael_album_info_fans">Fans</string>
+    <string name="label_album_photo_most_popular">Titre le plus populaire</string>
+    <string name="hint_albums_query_search">Search album or artist</string>
+    <string name="label_message_albums_error_empty">Nothing to show or something wrong.</string>
+    <string name="tab_title_preview">Preview</string>
+    <string name="tab_title_details">Details</string>
+    <string name="tab_title_tracks">Tracks</string>
 </resources>
