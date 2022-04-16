@@ -108,4 +108,5 @@ dependencies {
     implementation "com.google.android.exoplayer:exoplayer-rtsp:$expo_version"
 
 
+    implementation 'com.tbuonomo:dotsindicator:4.2'
 }

@@ -69,11 +69,10 @@ class BottomSheetAlbumDetails(private val album: Album) : BottomSheetDialogFragm
         binding?.apply {
             val adapter = DetailsViewPagerAdapter(childFragmentManager, lifecycle, album, tracks)
             viewPagerBottomSheet.adapter = adapter
+            dotsIndicator.setViewPager2(viewPagerBottomSheet)
             val viewPager2ViewHeightAnimator = ViewPager2ViewHeightAnimator()
             viewPager2ViewHeightAnimator.viewPager2 = viewPagerBottomSheet
-
         }
-
     }
 
     private fun setupTabLayout() {

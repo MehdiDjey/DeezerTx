@@ -18,7 +18,7 @@ data class Track(
     @SerialName("type") val type: String,
     @SerialName("preview") val preview: String,
     var isPlayed: Boolean = false
-    ) : Parcelable {
+) : Parcelable {
     override fun toString(): String {
         return Json.encodeToString(this)
     }
