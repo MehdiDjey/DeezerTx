@@ -31,6 +31,7 @@ class TracksRecyclerViewAdapter(
         )
     }
 
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val album = tracks[position]
         holder.bind(album)
@@ -56,22 +57,26 @@ class TracksRecyclerViewAdapter(
         private val coverUrl: String
     ) : RecyclerView.ViewHolder(row.root) {
         fun bind(track: Track) {
+
             row.apply {
                 ivItemTrack.load(coverUrl) {
-                    placeholder(R.drawable.ic_deezer)
                     crossfade(750)
                     transformations(
                         CircleCropTransformation()
                     )
                     build()
                 }
-                tvItemTitle.text = track.title
+                val icon = if (track.isPlayed)
+                    R.drawable.ic_baseline_pause_circle_outline_24
+                else R.drawable.ic_baseline_play_circle_outline_24
+
                 itemView.setOnClickListener {
                     interaction.onPlaySong(track, bindingAdapterPosition)
                 }
+                tvItemTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, icon, 0)
+                tvItemTitle.text = track.title
             }
         }
 
     }
-
 }

@@ -11,8 +11,10 @@ import com.example.deezertx.model.Album
 import com.example.deezertx.model.Track
 import com.example.deezertx.model.Tracks
 import com.example.deezertx.ui.adapter.TracksRecyclerViewAdapter
+import com.example.deezertx.utils.TAG
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
+import timber.log.Timber
 
 
 class AlbumTracksFragment(private val album: Album, private val tracks: Tracks?) : Fragment(),
@@ -114,6 +116,11 @@ class AlbumTracksFragment(private val album: Album, private val tracks: Tracks?)
      * @param bindingAdapterPosition
      */
     override fun onPlaySong(track: Track, bindingAdapterPosition: Int) {
+        Timber.tag(TAG)
+            .d("onPlaySong() called with: track = $track, bindingAdapterPosition = $bindingAdapterPosition")
+        //init state list
+        val updatedList = tracksRecyclerViewAdapter.tracks.map { it.copy(isPlayed = false) }
+        updatedList[bindingAdapterPosition].isPlayed = true
         if (position != bindingAdapterPosition && exoPlayer?.isPlaying == true) {
             stopMedia()
             setUrlPreviewSong(track)
@@ -121,9 +128,8 @@ class AlbumTracksFragment(private val album: Album, private val tracks: Tracks?)
         } else {
             setUrlPreviewSong(track)
         }
+        tracksRecyclerViewAdapter.tracks = updatedList
     }
-
-
 }
 
 
