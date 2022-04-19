@@ -18,8 +18,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tabIndicatorHeight="0dp"
-            app:tabSelectedTextColor="@color/purple_700"
-            app:tabTextColor="@color/purple_200" />
+            app:tabSelectedTextColor="@color/yellow_600"
+            app:tabTextColor="@color/yellow_50_alpha_060" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager_bottom_sheet"
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
-            app:dotsColor="@color/purple_200"
+            app:dotsColor="@color/yellow_50_alpha_060"
             app:dotsCornerRadius="8dp"
             app:dotsSize="16dp"
             app:dotsSpacing="4dp"
@@ -45,7 +45,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_pager_bottom_sheet"
             app:progressMode="true"
-            app:selectedDotColor="@color/purple_500" />
+            app:selectedDotColor="@color/yellow_600" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

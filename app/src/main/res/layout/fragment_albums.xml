@@ -42,29 +42,25 @@
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Most added"
-                app:chipBackgroundColor="@color/bg_chip_state" />
+                android:text="@string/action_filter_most_added" />
 
             <com.google.android.material.chip.Chip
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Aa-Zz"
-                app:chipBackgroundColor="@color/bg_chip_state" />
+                android:text="@string/action_filter_alphabetic" />
 
             <com.google.android.material.chip.Chip
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Newest"
-                app:chipBackgroundColor="@color/bg_chip_state" />
+                android:text="@string/action_filter_newest" />
 
             <com.google.android.material.chip.Chip
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Reset"
-                app:chipBackgroundColor="@color/bg_chip_state" />
+                android:text="@string/action_filter_reset" />
 
         </com.google.android.material.chip.ChipGroup>
 

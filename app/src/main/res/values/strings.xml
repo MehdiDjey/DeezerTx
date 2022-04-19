@@ -101,4 +101,8 @@
     <string name="tab_title_preview">Preview</string>
     <string name="tab_title_details">Details</string>
     <string name="tab_title_tracks">Tracks</string>
+    <string name="action_filter_most_added">Most added</string>
+    <string name="action_filter_alphabetic">Aa-Zz</string>
+    <string name="action_filter_newest">Newest</string>
+    <string name="action_filter_reset">Reset</string>
 </resources>
