@@ -56,8 +56,8 @@ class AlbumsRecyclerViewAdapter(private val interaction: Interaction) :
                 tvAlbumTitle.text = album.title
                 tvArtist.text = album.artist.name
                 ivItemRow.load(album.coverBig) {
-                    placeholder(R.drawable.ic_deezer)
-                    crossfade(750)
+                    crossfade(500)
+                    placeholder(R.drawable.ic_deezer).size(500)
                     build()
                 }
                 itemView.setOnClickListener {

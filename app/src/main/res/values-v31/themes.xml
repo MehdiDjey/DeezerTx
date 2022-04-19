@@ -28,5 +28,6 @@
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_deezer</item>
         <item name="windowSplashScreenAnimationDuration">2000</item>
         <item name="postSplashScreenTheme">@style/Theme.DeezerTx</item>
+        <item name="android:windowSplashScreenBrandingImage">@drawable/ic_deezer_logo</item>
     </style>
 </resources>

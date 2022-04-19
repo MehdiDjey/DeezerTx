@@ -8,7 +8,6 @@ plugins {
 
 android {
     compileSdk 32
-
     defaultConfig {
         applicationId "com.example.deezertx"
         minSdk 23
@@ -109,4 +108,6 @@ dependencies {
 
 
     implementation 'com.tbuonomo:dotsindicator:4.2'
+
+    implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
 }
