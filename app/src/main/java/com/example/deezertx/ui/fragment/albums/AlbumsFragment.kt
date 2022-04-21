@@ -3,8 +3,6 @@ package com.example.deezertx.ui.fragment.albums
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
@@ -16,6 +14,8 @@ import com.example.deezertx.model.Album
 import com.example.deezertx.ui.adapter.AlbumsRecyclerViewAdapter
 import com.example.deezertx.ui.fragment.album.BottomSheetAlbumDetails
 import com.example.deezertx.utils.TAG
+import com.example.deezertx.utils.hide
+import com.example.deezertx.utils.show
 import com.example.deezertx.viewmodel.albums.AlbumsViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
@@ -52,11 +52,11 @@ class AlbumsFragment : Fragment(), AlbumsRecyclerViewAdapter.Interaction,
     }
 
     private fun initViews() {
-        binding?.apply {
-            containerAlbumsFragment.visibility = GONE
-            tvNothingToShow.visibility = GONE
-            progress.visibility = VISIBLE
-        }
+        /*    binding?.apply {
+                containerAlbumsFragment.visibility = GONE
+                tvNothingToShow.visibility = GONE
+                progress.visibility = VISIBLE
+            }*/
     }
 
     /**
@@ -143,9 +143,11 @@ class AlbumsFragment : Fragment(), AlbumsRecyclerViewAdapter.Interaction,
      */
     private fun onLoadMore() {
         binding?.apply {
-            containerAlbumsFragment.visibility = GONE
-            tvNothingToShow.visibility = GONE
-            progress.visibility = VISIBLE
+            rvFragmentAlbumsList.hide()
+            tvNothingToShow.hide()
+            svFragmentAlbums.show()
+            chipGroupAlbumsFilter.show()
+            startShimmer()
         }
     }
 
@@ -156,9 +158,11 @@ class AlbumsFragment : Fragment(), AlbumsRecyclerViewAdapter.Interaction,
      */
     private fun onEmptyOrErrorDate() {
         binding?.apply {
-            progress.visibility = GONE
-            containerAlbumsFragment.visibility = GONE
-            tvNothingToShow.visibility = VISIBLE
+            stopShimmer()
+            rvFragmentAlbumsList.hide()
+            svFragmentAlbums.hide()
+            chipGroupAlbumsFilter.hide()
+            tvNothingToShow.show()
         }
     }
 
@@ -169,9 +173,11 @@ class AlbumsFragment : Fragment(), AlbumsRecyclerViewAdapter.Interaction,
     private fun onCompleteDateSuccess() {
         if (fetchedFullList.isNotEmpty())
             binding?.apply {
-                progress.visibility = GONE
-                tvNothingToShow.visibility = GONE
-                containerAlbumsFragment.visibility = VISIBLE
+                stopShimmer()
+                tvNothingToShow.hide()
+                svFragmentAlbums.show()
+                chipGroupAlbumsFilter.show()
+                rvFragmentAlbumsList.show()
             }
     }
 
@@ -239,4 +245,39 @@ class AlbumsFragment : Fragment(), AlbumsRecyclerViewAdapter.Interaction,
             albumsRecyclerViewAdapter.albums = newList
         }
     }
+
+    /**
+     * Start shimmer
+     *
+     */
+    private fun startShimmer() {
+        binding?.apply {
+            shimmer.apply {
+                startShimmer()
+                show()
+            }
+        }
+    }
+
+
+    /**
+     * Stop shimmer
+     *
+     */
+    private fun stopShimmer() {
+        binding?.shimmer?.apply {
+            stopShimmer()
+            hide()
+        }
+    }
+
+    /**
+     * On pause stop the shimmer
+     *
+     */
+    override fun onPause() {
+        stopShimmer()
+        super.onPause()
+    }
+
 }

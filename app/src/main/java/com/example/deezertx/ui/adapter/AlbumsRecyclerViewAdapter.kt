@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.size.Precision
 import com.example.deezertx.R
 import com.example.deezertx.databinding.ItemRowAlbumBinding
 import com.example.deezertx.model.Album
@@ -56,8 +57,9 @@ class AlbumsRecyclerViewAdapter(private val interaction: Interaction) :
                 tvAlbumTitle.text = album.title
                 tvArtist.text = album.artist.name
                 ivItemRow.load(album.coverBig) {
-                    crossfade(500)
-                    placeholder(R.drawable.ic_deezer).size(500)
+                    crossfade(750).size(500)
+                    precision(Precision.EXACT)
+                    placeholder(R.drawable.ic_deezer)
                     build()
                 }
                 itemView.setOnClickListener {
@@ -67,5 +69,4 @@ class AlbumsRecyclerViewAdapter(private val interaction: Interaction) :
         }
 
     }
-
 }
