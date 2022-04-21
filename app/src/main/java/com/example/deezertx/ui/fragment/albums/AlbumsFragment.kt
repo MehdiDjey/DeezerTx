@@ -45,18 +45,9 @@ class AlbumsFragment : Fragment(), AlbumsRecyclerViewAdapter.Interaction,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViews()
         setupAdapter()
         setupListener()
         subscribeObserver()
-    }
-
-    private fun initViews() {
-        /*    binding?.apply {
-                containerAlbumsFragment.visibility = GONE
-                tvNothingToShow.visibility = GONE
-                progress.visibility = VISIBLE
-            }*/
     }
 
     /**
