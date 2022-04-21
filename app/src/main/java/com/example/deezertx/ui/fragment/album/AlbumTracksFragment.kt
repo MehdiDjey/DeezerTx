@@ -22,7 +22,7 @@ class AlbumTracksFragment(private val album: Album, private val tracks: Tracks?)
     private var _biding: FragmentAlbumTracksBinding? = null
     private val binding get() = _biding
     private lateinit var tracksRecyclerViewAdapter: TracksRecyclerViewAdapter
-    private var position = -1
+    private var currentPosition = -1
     private var exoPlayer: ExoPlayer? = null
 
     override fun onCreateView(
@@ -113,22 +113,33 @@ class AlbumTracksFragment(private val album: Album, private val tracks: Tracks?)
      * Start the selected song
      *
      * @param track
-     * @param bindingAdapterPosition
+     * @param position
      */
-    override fun onPlaySong(track: Track, bindingAdapterPosition: Int) {
+    override fun onPlaySong(track: Track, position: Int) {
         Timber.tag(TAG)
-            .d("onPlaySong() called with: track = $track, bindingAdapterPosition = $bindingAdapterPosition")
+            .d("onPlaySong() called with: track = $track, bindingAdapterPosition = $position")
         //init state list
         val updatedList = tracksRecyclerViewAdapter.tracks.map { it.copy(isPlayed = false) }
-        updatedList[bindingAdapterPosition].isPlayed = true
-        if (position != bindingAdapterPosition && exoPlayer?.isPlaying == true) {
+        updatedList[position].isPlayed = true
+        if (currentPosition != position && exoPlayer?.isPlaying == true) {
             stopMedia()
             setUrlPreviewSong(track)
-            position = bindingAdapterPosition
+            currentPosition = position
         } else {
             setUrlPreviewSong(track)
         }
         tracksRecyclerViewAdapter.tracks = updatedList
+    }
+
+    /**
+     * On like song action
+     *
+     * @param track
+     * @param position
+     */
+    override fun onLikeSong(track: Track, position: Int) {
+        Timber.tag(TAG).d("onLikeSong() called with: track = $track, position = $position")
+        // TODO:  do your stuff here, ex: sending  value to the ws to update track state
     }
 }
 

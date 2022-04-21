@@ -2,6 +2,9 @@ package com.example.deezertx.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
@@ -9,6 +12,7 @@ import com.example.deezertx.R
 import com.example.deezertx.databinding.ItemRowTrackBinding
 import com.example.deezertx.model.Track
 import com.example.deezertx.utils.AutoUpdatableAdapter
+import com.example.deezertx.utils.addOnClickListener
 import kotlin.properties.Delegates
 
 class TracksRecyclerViewAdapter(
@@ -48,7 +52,8 @@ class TracksRecyclerViewAdapter(
     }
 
     interface Interaction {
-        fun onPlaySong(track: Track, bindingAdapterPosition: Int)
+        fun onPlaySong(track: Track, position: Int)
+        fun onLikeSong(track: Track, position: Int)
     }
 
     inner class ViewHolder(
@@ -66,17 +71,42 @@ class TracksRecyclerViewAdapter(
                     )
                     build()
                 }
-                val icon = if (track.isPlayed)
-                    R.drawable.ic_baseline_pause_circle_outline_24
-                else R.drawable.ic_baseline_play_circle_outline_24
-
-                itemView.setOnClickListener {
-                    interaction.onPlaySong(track, bindingAdapterPosition)
-                }
-                tvItemTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, icon, 0)
-                tvItemTitle.text = track.title
+                updateItemOnLike(ivItemLike, track)
+                updateItemOnPlaySong(groupRowTrack, track, tvItemTitle)
             }
         }
 
+
+        private fun updateItemOnLike(ivItemLike: AppCompatImageView, track: Track) {
+            ivItemLike.apply {
+                setOnClickListener {
+                    track.isLiked = !track.isLiked
+                    val iconLikeSate = if (track.isLiked)
+                        R.drawable.ic_baseline_favorite_24
+                    else R.drawable.ic_baseline_favorite_border_24
+
+                    setImageResource(iconLikeSate)
+                    interaction.onLikeSong(track, bindingAdapterPosition)
+                }
+            }
+        }
+
+        private fun updateItemOnPlaySong(
+            groupRowTrack: Group,
+            track: Track,
+            tvItemTitle: TextView
+        ) {
+            val iconPlayState = if (track.isPlayed)
+                R.drawable.ic_baseline_pause_circle_outline_24
+            else R.drawable.ic_baseline_play_circle_outline_24
+
+            groupRowTrack.addOnClickListener {
+                interaction.onPlaySong(track, bindingAdapterPosition)
+            }
+            tvItemTitle.apply {
+                setCompoundDrawablesWithIntrinsicBounds(0, 0, iconPlayState, 0)
+                text = track.title
+            }
+        }
     }
 }

@@ -5,6 +5,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
+import androidx.constraintlayout.widget.Group
 
 /**
  * get tag of current current instance
@@ -52,4 +53,16 @@ fun View.hide() {
  */
 fun View.show() {
     this.visibility = VISIBLE
+}
+
+
+/**
+ * Set all on click listener on ConstraintLayout Group
+ *
+ * @param listener
+ */
+fun Group.addOnClickListener(listener: (view: View) -> Unit) {
+    referencedIds.forEach { id ->
+        rootView.findViewById<View>(id).setOnClickListener(listener)
+    }
 }
