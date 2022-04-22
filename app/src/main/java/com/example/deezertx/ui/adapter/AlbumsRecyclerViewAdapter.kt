@@ -1,11 +1,18 @@
 package com.example.deezertx.ui.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.View.OnTouchListener
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.size.Precision
 import com.example.deezertx.R
+import com.example.deezertx.base.BaseApplication
 import com.example.deezertx.databinding.ItemRowAlbumBinding
 import com.example.deezertx.model.Album
 import com.example.deezertx.utils.AutoUpdatableAdapter
@@ -54,7 +61,11 @@ class AlbumsRecyclerViewAdapter(private val interaction: Interaction) :
     ) : RecyclerView.ViewHolder(row.root) {
         fun bind(album: Album) {
             row.apply {
-                tvAlbumTitle.text = album.title
+                tvAlbumTitle.apply {
+                    text = album.title
+                    moreOptionListener()
+                }
+
                 tvArtist.text = album.artist.name
                 ivItemRow.load(album.coverBig) {
                     crossfade(750).size(500)
@@ -67,6 +78,27 @@ class AlbumsRecyclerViewAdapter(private val interaction: Interaction) :
                 }
             }
         }
-
     }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun TextView.moreOptionListener() {
+        setOnTouchListener(OnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                if (event.rawX >= this.right - this.totalPaddingRight) {
+                    val popup = PopupMenu(context, this)
+                    popup.inflate(R.menu.menu_more_album_option)
+                    popup.setOnMenuItemClickListener {
+                        // TODO: do something on selected album option
+                        Toast.makeText(BaseApplication.instance, "${it.title}", Toast.LENGTH_SHORT)
+                            .show()
+                        true
+                    }
+                    popup.show()
+                    return@OnTouchListener true
+                }
+            }
+            true
+        })
+    }
+
 }

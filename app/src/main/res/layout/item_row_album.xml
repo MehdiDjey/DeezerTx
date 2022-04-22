@@ -34,6 +34,8 @@
         app:layout_constraintEnd_toEndOf="@id/ivItemRow"
         app:layout_constraintStart_toStartOf="@id/ivItemRow"
         app:layout_constraintTop_toBottomOf="@id/ivItemRow"
+        android:drawableEnd="@drawable/ic_baseline_more_vert_24"
+        tools:ignore="UseCompatTextViewDrawableXml"
         tools:text="Album name" />
 
     <TextView
