@@ -2,10 +2,7 @@ package com.example.deezertx.base
 
 import android.app.Application
 import androidx.viewbinding.BuildConfig
-import com.example.deezertx.di.RetrofitModule
-import com.example.deezertx.di.repositoryModule
-import com.example.deezertx.di.serviceModule
-import com.example.deezertx.di.viewModelModule
+import com.example.deezertx.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -30,7 +27,8 @@ class BaseApplication : Application() {
             androidContext(this@BaseApplication)
             modules(
                 listOf(
-                    viewModelModule,
+                    AlbumsViewModelModule,
+                    AlbumsDetailsViewModelModule,
                     serviceModule,
                     repositoryModule,
                     RetrofitModule

@@ -1,4 +1,4 @@
-package com.example.deezertx.ui.fragment.album
+package com.example.deezertx.ui.fragment.albumDetails.tabs
 
 import android.os.Bundle
 import android.view.LayoutInflater

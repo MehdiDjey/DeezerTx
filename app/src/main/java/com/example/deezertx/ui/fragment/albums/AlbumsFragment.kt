@@ -12,11 +12,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.deezertx.databinding.FragmentAlbumsBinding
 import com.example.deezertx.model.Album
 import com.example.deezertx.ui.adapter.AlbumsRecyclerViewAdapter
-import com.example.deezertx.ui.fragment.album.BottomSheetAlbumDetails
+import com.example.deezertx.ui.fragment.albumDetails.AlbumsDetailsViewModel
+import com.example.deezertx.ui.fragment.albumDetails.BottomSheetAlbumDetails
 import com.example.deezertx.utils.TAG
 import com.example.deezertx.utils.hide
 import com.example.deezertx.utils.show
-import com.example.deezertx.viewmodel.albums.AlbumsViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
@@ -31,6 +31,7 @@ class AlbumsFragment : Fragment(), AlbumsRecyclerViewAdapter.Interaction,
     private var _biding: FragmentAlbumsBinding? = null
     private val binding get() = _biding
     private val albumsViewModel: AlbumsViewModel by sharedViewModel()
+    private val albumDetailsViewModel: AlbumsDetailsViewModel by sharedViewModel()
     private lateinit var albumsRecyclerViewAdapter: AlbumsRecyclerViewAdapter
     private var fetchedFullList: MutableList<Album> = mutableListOf()
     private var index = 0
@@ -188,7 +189,7 @@ class AlbumsFragment : Fragment(), AlbumsRecyclerViewAdapter.Interaction,
      */
     override fun onAlbumSelected(album: Album) {
         Timber.tag(TAG).d("onAlbumSelected() called with: album = $album")
-        albumsViewModel.getAlbumsTracks(album.idAlbum)
+        albumDetailsViewModel.getAlbumsTracks(album.idAlbum)
         val bt = BottomSheetAlbumDetails(album)
         bt.show(childFragmentManager, bt.tag)
     }

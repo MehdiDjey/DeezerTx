@@ -1,4 +1,4 @@
-package com.example.deezertx.ui.fragment.album
+package com.example.deezertx.ui.fragment.albumDetails
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,6 @@ import com.example.deezertx.model.Tracks
 import com.example.deezertx.ui.adapter.DetailsViewPagerAdapter
 import com.example.deezertx.utils.ViewPager2ViewHeightAnimator
 import com.example.deezertx.utils.toast
-import com.example.deezertx.viewmodel.albums.AlbumsViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -22,7 +21,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 class BottomSheetAlbumDetails(private val album: Album) : BottomSheetDialogFragment() {
     private var _biding: LayoutBottomSheetBinding? = null
     private val binding get() = _biding
-    private val albumsViewModel: AlbumsViewModel by sharedViewModel()
+    private val albumDetailsViewModel: AlbumsDetailsViewModel by sharedViewModel()
 
     override fun onResume() {
         super.onResume()
@@ -54,7 +53,7 @@ class BottomSheetAlbumDetails(private val album: Album) : BottomSheetDialogFragm
     }
 
     private fun subscribeObserver() {
-        with(albumsViewModel) {
+        with(albumDetailsViewModel) {
             tracks.observe(viewLifecycleOwner) {
                 setupPagerAdapter(it)
                 setupTabLayout()

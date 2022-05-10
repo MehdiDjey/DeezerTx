@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.example.deezertx.ui.fragment.album.AlbumDetailsFragment"
+        android:name="com.example.deezertx.ui.fragment.albumDetails.AlbumDetailsFragment"
         android:label="Details Fragment"
         tools:layout="@layout/fragment_details_album" />
 </navigation>

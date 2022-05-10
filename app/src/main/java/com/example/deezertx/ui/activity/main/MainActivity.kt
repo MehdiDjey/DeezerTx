@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.deezertx.databinding.ActivityMainBinding
-import com.example.deezertx.viewmodel.albums.AlbumsViewModel
+import com.example.deezertx.ui.fragment.albums.AlbumsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 

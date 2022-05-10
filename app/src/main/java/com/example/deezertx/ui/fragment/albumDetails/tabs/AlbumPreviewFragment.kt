@@ -1,4 +1,4 @@
-package com.example.deezertx.ui.fragment.album
+package com.example.deezertx.ui.fragment.albumDetails.tabs
 
 import android.annotation.SuppressLint
 import android.os.Bundle

@@ -6,9 +6,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.deezertx.model.Album
 import com.example.deezertx.model.Tracks
-import com.example.deezertx.ui.fragment.album.AlbumInfoFragment
-import com.example.deezertx.ui.fragment.album.AlbumPreviewFragment
-import com.example.deezertx.ui.fragment.album.AlbumTracksFragment
+import com.example.deezertx.ui.fragment.albumDetails.tabs.AlbumInfoFragment
+import com.example.deezertx.ui.fragment.albumDetails.tabs.AlbumPreviewFragment
+import com.example.deezertx.ui.fragment.albumDetails.tabs.AlbumTracksFragment
 
 private const val NUM_TABS = 3
 private const val NUM_TABS_ON_EMPTY_DATA = 1
