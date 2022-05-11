@@ -40,7 +40,7 @@ dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'com.google.android.material:material:1.6.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
@@ -112,4 +112,17 @@ dependencies {
     implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
 
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
+    // Dependencies for local unit tests
+    testImplementation "org.mockito:mockito-core:2.23.0"
+    // mock extension function
+    testImplementation "io.mockk:mockk:1.10.0"
+
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1"
+
+    // https://mvnrepository.com/artifact/com.squareup.okhttp3/mockwebserver
+    testImplementation 'com.squareup.okhttp3:mockwebserver:3.2.0'
+
 }

@@ -16,6 +16,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class AlbumsViewModel(private val repository: AlbumsRepository) : ViewModel(), IOnAlbums {
+
     private var _albums: MutableLiveData<Albums?> = MutableLiveData()
     val albums: LiveData<Albums?> = _albums
 

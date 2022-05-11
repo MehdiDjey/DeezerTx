@@ -34,7 +34,7 @@ class AlbumsFragment : Fragment(), AlbumsRecyclerViewAdapter.Interaction,
     private val albumDetailsViewModel: AlbumsDetailsViewModel by sharedViewModel()
     private lateinit var albumsRecyclerViewAdapter: AlbumsRecyclerViewAdapter
     private var fetchedFullList: MutableList<Album> = mutableListOf()
-    private var index = 0
+    private var pageIndex = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -112,15 +112,15 @@ class AlbumsFragment : Fragment(), AlbumsRecyclerViewAdapter.Interaction,
 
             hasNext.observe(viewLifecycleOwner) { hasNext ->
                 if (hasNext) {
-                    index += 25
-                    albumsViewModel.getAllAlbums(index)
+                    pageIndex += 25
+                    albumsViewModel.getAllAlbums(pageIndex)
                     onLoadMore()
                 } else {
                     onCompleteDateSuccess()
                 }
             }
             error.observe(viewLifecycleOwner) {
-                if (fetchedFullList.isNullOrEmpty()) {
+                if (fetchedFullList.isEmpty()) {
                     onEmptyOrErrorDate()
                 }
                 Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
